@@ -21,37 +21,21 @@ if [[ $RUN_MATLAB -eq 1 ]]
 then
     LOAD_FILES=1
 fi
-if [[ -f "optimize_espa.cpp" ]]
-then
-    PANUA=1
-else
-    PANUA=0
-fi
 
 
 if [[ $LOAD_FILES -eq 1 ]]
 then
 
-    if [[ $PANUA -eq 1 ]]
-    then
-        rm optimize_espa.cpp
-        ln -s optimize_espa_file.cpp optimize_espa.cpp
-        make clean
-        make -j8
-    fi
+   rm -f optimize_espa
+   ln -s optimize_espa_file optimize_espa
     
     Nx=${#gridsX[@]}
     Nb=${#gridsB[@]}
     echo "Using $Nx Xbeta and $Nb beta_eLR files..."
 ############################################
 else
-    if [[ $PANUA -eq 1 ]]
-    then
-        rm optimize_espa.cpp
-        ln -s optimize_espa_generator.cpp optimize_espa.cpp
-        make clean
-        make -j8
-    fi
+   rm -f optimize_espa
+   ln -s optimize_espa_generator optimize_espa
     
     declare -a gridsX=(1024 2048 4096 8192 16384 32768 65536 131072 262144 524288 1048576)
     
@@ -70,13 +54,7 @@ for i in $(seq 0 $((Nx-1))); do
 #========================================================
 if [[ $RUN_MATLAB -ne 1 ]]
 then
-    if [[ $PANUA -eq 1 ]]
-    then
-        echo "RUNNING C++ Code"
-    else
-        echo "Please obtain the Panua-Ipopt from http://www.panua.ch/"
-        exit
-    fi
+    echo "RUNNING C++ Code"
 
     if [[ $LOAD_FILES -eq 1 ]]
     then
@@ -99,7 +77,7 @@ fi
 if [[ $RUN_MATLAB -eq 1 ]]
 then
     # Execute Matlab code: matlab -r test_bench
-    echo "Running MATLAB benchmark with data files:"
+    echo "Running MATLAB benchmark with loading the data files:"
     echo "data/"${gridsX[$i]}
     echo "data/"${gridsB[$i]}
     ${MEMORY_WRAPPER} ${MATLAB} -singleCompThread -nodisplay -nosplash -nodesktop -r "try test_bench('"data/"${gridsX[$i]}', '"data/"${gridsB[$i]}', $SOLVER); catch; end; quit" 2>&1 |  tee ${gridsX[$i]}".matlab.out"
