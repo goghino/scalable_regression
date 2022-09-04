@@ -1,0 +1,15 @@
+prefix=/local_home/juraj/eSPA_andreas/MyIpopt-low-rank-hessian-v1/myinstall
+#prefix=${pcfiledir}/../..
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib64
+includedir=${prefix}/include/coin-or
+
+Name: Ipopt
+Description: Interior Point Optimizer
+URL: https://github.com/coin-or/Ipopt
+Version: 3.14.9
+Cflags: -I${includedir}
+Libs: -L${libdir} -lipopt
+Requires.private: 
+#Libs: -L${libdir} -lipopt -L/opt/intel/compilers_and_libraries_2020.0.166/linux/mkl/lib/intel64 -Wl,--no-as-needed -lmkl_intel_lp64 -lmkl_gnu_thread -lmkl_core -lgomp -lpthread -lm -ldl -lm  -ldl
+#Requires: 

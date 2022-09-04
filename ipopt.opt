@@ -1,0 +1,3 @@
+mu_strategy adaptive 
+mu_oracle loqo 
+mu_min 1e-7 
