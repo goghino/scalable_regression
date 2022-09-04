@@ -28,7 +28,7 @@ The MathWorks' Fmincon and Ipopt solvers are run using the MATLAB implementation
 Thus, the variable `RUN_MATLAB` needs to be set to `1`. Then the Fmincon or Ipopt solver is selected using
 the variable `SOLVER=$FMINCON` or `SOLVER=$IPOPT`.
 
-On the other hand, Panua-Ipopt codebase is completely C++ based, thus in order to execute the code set `RUN_MATLAB` variable to `0`.
+On the other hand, Panua-Ipopt codebase is completely C++ based, thus in order to execute the code set `RUN_MATLAB` variable to `0`. Please obtain Panua-Ipopt benchmark from from [Panua Technologies](http://panua.ch/ "Panua Technologies").
 
 2. Select the regression models:
 ```sh
